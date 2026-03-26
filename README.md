@@ -38,7 +38,7 @@ We are actively looking for campus partners, tech sponsors, and community collab
 * **Tech Partners:** 
 * **Community Partners:** 
 
-*To sponsor Techprabha 2026, drop us an email 
+*To sponsor Techprabha 2026, drop us an email.*
 
 ---
 
