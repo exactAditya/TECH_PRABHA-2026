@@ -41,7 +41,7 @@ export default function EventsPage() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 w-full"
         >
           <AnimatePresence>
-            {filteredEvents.map((event, i) => (
+            {filteredEvents.map((event) => (
               <motion.div
                 key={event.slug}
                 layout

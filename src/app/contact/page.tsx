@@ -92,9 +92,11 @@ export default function ContactPage() {
 
                     {/* Image Placeholder */}
                     <div className="relative w-48 h-56 mb-4 filter drop-shadow-[0_0_10px_rgba(0,0,0,0.8)] flex-grow flex items-end justify-center">
-                      <img 
-                        src={member.image} 
+                      <Image
+                        src={member.image}
                         alt={member.name}
+                        fill
+                        sizes="192px"
                         className="object-cover h-full object-bottom"
                         style={{ maskImage: 'linear-gradient(to top, transparent 0%, black 20%)', WebkitMaskImage: 'linear-gradient(to top, transparent 0%, black 20%)' }}
                       />

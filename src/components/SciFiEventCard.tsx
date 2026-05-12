@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { EventDetails } from "@/data/events";
 import { Space_Grotesk, Syncopate } from "next/font/google";
@@ -60,16 +61,16 @@ export default function SciFiEventCard({ event }: Props) {
 
             {/* Image Banner Container */}
             <div className="w-full relative h-[140px] mb-auto border-[1.5px] border-white/20 p-[2px] bg-black/60 shadow-lg">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={event.image}
-                alt={event.title}
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500 filter contrast-125"
-              />
-              {/* Overlay glow */}
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
-            </div>
-
+                <Image
+                  src={event.image}
+                  alt={event.title}
+                  fill
+                  sizes="400px"
+                  className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500 filter contrast-125"
+                />
+                {/* Overlay glow */}
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+              </div>
             {/* Buttons Area (Overlapping the vibrant red/purple bottom) */}
             <div className="flex w-full gap-3 justify-center mb-6 mt-4">
               <button
@@ -86,21 +87,12 @@ export default function SciFiEventCard({ event }: Props) {
               >
                 Register
               </button>
-              <Link href={`/events/${event.slug}`} className="flex-1">
-                <button
-                  className={`${syncopate.className} w-full bg-[#0a101f] border-2 text-white text-[10px] md:text-xs font-bold py-2 transition-all duration-300 uppercase tracking-widest shadow-[0_0_15px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_20px_currentColor]`}
-                  style={{ borderColor: event.color, color: 'inherit' }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'white';
-                    e.currentTarget.style.color = 'black';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = '#0a101f';
-                    e.currentTarget.style.color = 'white';
-                  }}
-                >
-                  Explore
-                </button>
+              <Link
+                href={`/events/${event.slug}`}
+                className={`${syncopate.className} flex-1 inline-flex items-center justify-center w-full bg-[#0a101f] border-2 text-white text-[10px] md:text-xs font-bold py-2 transition-all duration-300 uppercase tracking-widest shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:bg-white hover:text-black group-hover:shadow-[0_0_20px_currentColor]`}
+                style={{ borderColor: event.color, color: 'inherit' }}
+              >
+                Explore
               </Link>
             </div>
 

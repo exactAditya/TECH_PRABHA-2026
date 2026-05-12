@@ -7,18 +7,16 @@ import {
   Users,
   Gem,
   ShoppingCart,
-  Camera,
-  Briefcase,
-  Play,
-  Hash,
   Code,
-  MessageSquare,
-  MessageCircle,
 } from "lucide-react";
 import { Space_Grotesk, Inter, Syncopate, Chakra_Petch } from "next/font/google";
+import type { SVGProps } from "react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
+
+type IconProps = SVGProps<SVGSVGElement> & { size?: number };
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   weight: ["600", "700"],
@@ -39,15 +37,15 @@ const leftNavItems = [
   { icon: ShoppingCart, label: "STORE", href: "/store" },
 ];
 
-const XIcon = ({ size, className }: any) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className={className} strokeLinecap="round" strokeLinejoin="round">
+const XIcon = ({ size, className, ...props }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className={className} strokeLinecap="round" strokeLinejoin="round" {...props}>
     <path d="M4 4l11.733 16h4.267l-11.733-16z" />
     <path d="M4 20l6.768-6.768m2.46-2.46L20 4" />
   </svg>
 );
 
-const DiscordIcon = ({ size, className }: any) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className={className} strokeLinecap="round" strokeLinejoin="round">
+const DiscordIcon = ({ size, className, ...props }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className={className} strokeLinecap="round" strokeLinejoin="round" {...props}>
     <path d="M9 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
     <path d="M15 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
     <path d="M7 11.5v-1a5 5 0 0 1 10 0v1" />
@@ -57,37 +55,37 @@ const DiscordIcon = ({ size, className }: any) => (
   </svg>
 );
 
-const WhatsAppIcon = ({ size, className }: any) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className={className} strokeLinecap="round" strokeLinejoin="round">
+const WhatsAppIcon = ({ size, className, ...props }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className={className} strokeLinecap="round" strokeLinejoin="round" {...props}>
     <path d="M3 21l1.65-3.8A9 9 0 1 1 21 12a9 9 0 0 1-18 5.2L3 21z" />
     <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0-5-5z" />
   </svg>
 );
 
-const FacebookIcon = ({ size, className }: any) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className={className} strokeLinecap="round" strokeLinejoin="round">
+const FacebookIcon = ({ size, className, ...props }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className={className} strokeLinecap="round" strokeLinejoin="round" {...props}>
     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.81l.53-4H14V7a1 1 0 0 1 1-1h3z" />
   </svg>
 );
 
-const InstagramIcon = ({ size, className }: any) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className={className} strokeLinecap="round" strokeLinejoin="round">
+const InstagramIcon = ({ size, className, ...props }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className={className} strokeLinecap="round" strokeLinejoin="round" {...props}>
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
   </svg>
 );
 
-const LinkedinIcon = ({ size, className }: any) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className={className} strokeLinecap="round" strokeLinejoin="round">
+const LinkedinIcon = ({ size, className, ...props }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className={className} strokeLinecap="round" strokeLinejoin="round" {...props}>
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
     <rect x="2" y="9" width="4" height="12" />
     <circle cx="4" cy="4" r="2" />
   </svg>
 );
 
-const YoutubeIcon = ({ size, className }: any) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className={className} strokeLinecap="round" strokeLinejoin="round">
+const YoutubeIcon = ({ size, className, ...props }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className={className} strokeLinecap="round" strokeLinejoin="round" {...props}>
     <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
     <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" />
   </svg>
@@ -114,8 +112,8 @@ export default function Navigation() {
       <nav className="fixed top-0 left-0 right-0 h-20 z-50 flex items-center justify-between px-6 bg-gradient-to-b from-[#030008] to-transparent pointer-events-none transition-all">
         <div className="flex flex-row items-center gap-6 pointer-events-auto">
           {/* Replaced T-26 text with logos */}
-          <img src="/gkciet1.png" alt="GKCIET Logo" className="h-10 md:h-12 w-auto object-contain" />
-          <img src="/debug.png" alt="Debug Logo" className="h-10 md:h-12 w-10 md:w-12 object-contain scale-125" />
+          <Image src="/gkciet1.png" alt="GKCIET Logo" width={48} height={48} className="h-10 md:h-12 w-auto object-contain" />
+          <Image src="/debug.png" alt="Debug Logo" width={48} height={48} className="h-10 md:h-12 w-10 md:w-12 object-contain scale-125" />
         </div>
 
         <div
@@ -193,8 +191,8 @@ export default function Navigation() {
           >
             <div className="flex justify-between items-center mb-12">
               <div className="flex flex-row items-center gap-4">
-                <img src="/gkciet1.png" alt="GKCIET Logo" className="h-8 w-auto object-contain" />
-                <img src="/debug.png" alt="Debug Logo" className="h-8 w-8 object-contain scale-125" />
+                <Image src="/gkciet1.png" alt="GKCIET Logo" width={32} height={32} className="h-8 w-auto object-contain" />
+                <Image src="/debug.png" alt="Debug Logo" width={32} height={32} className="h-8 w-8 object-contain scale-125" />
               </div>
               <Code
                 size={28}
