@@ -1,9 +1,10 @@
 "use client";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { ChevronDown, ArrowRight } from "lucide-react";
-import { Space_Grotesk, Inter, Syncopate, Yatra_One } from "next/font/google";
-import { Suspense, useEffect, useState } from "react";
+import { ArrowRight } from "lucide-react";
+import { Space_Grotesk, Inter, Yatra_One } from "next/font/google";
+import { Suspense, useState } from "react";
 
 // Disable SSR for the 3D Canvas and load it only on capable clients
 const SynthCanvas = dynamic(() => import("./SynthCanvas"), {
@@ -16,26 +17,21 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["400", "600", "700"],
 });
 const inter = Inter({ subsets: ["latin"], weight: ["300", "400", "500"] });
-const syncopate = Syncopate({ subsets: ["latin"], weight: ["400", "700"] });
 const yatraOne = Yatra_One({ subsets: ["latin"], weight: "400" });
 
 export default function HeroSection() {
-  const [canRenderCanvas, setCanRenderCanvas] = useState(false);
-
-  useEffect(() => {
-    let supported = false;
+  const [canRenderCanvas] = useState(() => {
+    if (typeof document === "undefined") return false;
 
     try {
       const canvas = document.createElement("canvas");
-      supported = Boolean(
+      return Boolean(
         canvas.getContext("webgl") || canvas.getContext("experimental-webgl")
       );
     } catch {
-      supported = false;
+      return false;
     }
-
-    setCanRenderCanvas(supported);
-  }, []);
+  });
 
   return (
     <section className="relative w-full min-h-[100svh] overflow-hidden bg-[#030008] flex items-center justify-center">
@@ -145,7 +141,10 @@ export default function HeroSection() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.9 }}
         >
-          <button className="group relative px-8 py-4 bg-white text-black rounded-full overflow-hidden transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(0,240,255,0.4)] border border-transparent hover:border-[#00f0ff]/50">
+          <Link
+            href="/events"
+            className="group relative inline-flex px-8 py-4 bg-white text-black rounded-full overflow-hidden transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(0,240,255,0.4)] border border-transparent hover:border-[#00f0ff]/50"
+          >
             <div className="absolute inset-0 bg-gradient-to-r from-[#00f0ff] to-[#7000ff] opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
             <span
               className={`${spaceGrotesk.className} relative z-10 flex items-center gap-2 font-bold uppercase tracking-wider text-sm md:text-base transition-colors duration-300`}
@@ -153,7 +152,7 @@ export default function HeroSection() {
               Events
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </span>
-          </button>
+          </Link>
         </motion.div>
       </div>
     </section>

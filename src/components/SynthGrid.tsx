@@ -1,7 +1,5 @@
 "use client";
-import { useRef } from "react";
 import { Float, Stars, Sparkles } from "@react-three/drei";
-import * as THREE from "three";
 
 export default function SynthGrid() {
   // A high-end, premium deep cyber grid with floating geometry

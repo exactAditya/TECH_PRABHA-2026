@@ -1,18 +1,14 @@
 "use client";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { Space_Grotesk, Inter, Syncopate } from "next/font/google";
-import { Suspense, useEffect, useState } from "react";
+import { Inter, Syncopate } from "next/font/google";
+import { Suspense, useState } from "react";
 
 const SynthCanvas = dynamic(() => import("./SynthCanvas"), {
   ssr: false,
   loading: () => null,
 });
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-});
 const inter = Inter({ subsets: ["latin"], weight: ["300", "400", "500"] });
 const syncopate = Syncopate({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -23,20 +19,18 @@ interface PageLayoutProps {
 }
 
 export default function PageLayout({ title, subtitle, children }: PageLayoutProps) {
-  const [canRenderCanvas, setCanRenderCanvas] = useState(false);
+  const [canRenderCanvas] = useState(() => {
+    if (typeof document === "undefined") return false;
 
-  useEffect(() => {
-    let supported = false;
     try {
       const canvas = document.createElement("canvas");
-      supported = Boolean(
+      return Boolean(
         canvas.getContext("webgl") || canvas.getContext("experimental-webgl")
       );
     } catch {
-      supported = false;
+      return false;
     }
-    setCanRenderCanvas(supported);
-  }, []);
+  });
 
   return (
     <section className="relative w-full min-h-[100svh] overflow-x-hidden bg-[#030008] flex items-center justify-center pt-24 pb-12 px-6">
