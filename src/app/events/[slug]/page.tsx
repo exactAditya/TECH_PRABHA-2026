@@ -87,7 +87,11 @@ export default async function EventDetailPage({
 
           {/* Registration CTA */}
           <div className="mt-12 flex flex-col sm:flex-row gap-6 items-center border-t border-white/10 pt-10">
-            <RegisterButton color={event.color} />
+            <RegisterButton
+              color={event.color}
+              href={event.registrationUrl}
+              links={event.registrationLinks}
+            />
             {/* <button className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors tracking-widest text-sm uppercase">
               <Share2 size={16} />
               Share Event

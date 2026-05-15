@@ -1,32 +1,61 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
+import Link from "next/link";
 
 interface RegisterButtonProps {
   color: string;
+  href?: string;
+  links?: Array<{ label: string; url: string }>;
+  label?: string;
 }
 
-export default function RegisterButton({ color }: RegisterButtonProps) {
+export default function RegisterButton({ color, href, links, label = "Register Now" }: RegisterButtonProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const isMultiLink = Boolean(links && links.length > 0);
+  const isDirectLink = Boolean(href);
+
+  const baseClassName =
+    "w-full sm:w-auto px-10 py-4 bg-white text-black font-bold uppercase tracking-widest rounded-full transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.2)]";
+
+  const handleMouseEnter = (e: MouseEvent<HTMLElement>) => {
+    const el = e.currentTarget as HTMLElement;
+    el.style.boxShadow = `0 0 30px ${color}80`;
+    el.style.backgroundColor = color;
+    el.style.color = "#fff";
+  };
+
+  const handleMouseLeave = (e: MouseEvent<HTMLElement>) => {
+    const el = e.currentTarget as HTMLElement;
+    el.style.boxShadow = "0 0 20px rgba(255,255,255,0.2)";
+    el.style.backgroundColor = "#fff";
+    el.style.color = "#000";
+  };
 
   return (
     <>
-      <button 
-        className="w-full sm:w-auto px-10 py-4 bg-white text-black font-bold uppercase tracking-widest rounded-full transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
-        onClick={() => setIsModalOpen(true)}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.boxShadow = `0 0 30px ${color}80`;
-          e.currentTarget.style.backgroundColor = color;
-          e.currentTarget.style.color = '#fff';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.boxShadow = `0 0 20px rgba(255,255,255,0.2)`;
-          e.currentTarget.style.backgroundColor = '#fff';
-          e.currentTarget.style.color = '#000';
-        }}
-      >
-        Register Now
-      </button>
+      {isDirectLink ? (
+        <Link
+          href={href!}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={baseClassName}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {label}
+        </Link>
+      ) : (
+        <button
+          className={baseClassName}
+          onClick={() => setIsModalOpen(true)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {label}
+        </button>
+      )}
 
       {/* Coming Soon Modal */}
       {isModalOpen && (
@@ -46,19 +75,46 @@ export default function RegisterButton({ color }: RegisterButtonProps) {
               </svg>
             </button>
 
-            <h2 className="text-3xl font-bold text-white mb-3 tracking-widest uppercase">
-              Coming Soon
-            </h2>
-            <p className="text-gray-400 mb-6">
-              Registration for this event has not opened yet. Stay tuned!
-            </p>
+            {isMultiLink ? (
+              <>
+                <h2 className="text-2xl font-bold text-white mb-3 tracking-widest uppercase">
+                  Choose Form
+                </h2>
+                <p className="text-gray-400 mb-6">
+                  Select the registration form for your domain.
+                </p>
+                <div className="flex flex-col gap-3 mb-6">
+                  {links!.map((item) => (
+                    <Link
+                      key={item.url}
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full px-4 py-3 rounded-xl font-bold uppercase tracking-wider transition-all duration-300 hover:scale-[1.02] bg-white/10 text-white border border-white/10 hover:border-white/30"
+                      style={{ boxShadow: `0 0 12px ${color}20` }}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <>
+                <h2 className="text-3xl font-bold text-white mb-3 tracking-widest uppercase">
+                  Coming Soon
+                </h2>
+                <p className="text-gray-400 mb-6">
+                  Registration for this event has not opened yet. Stay tuned!
+                </p>
+              </>
+            )}
             
             <button
               onClick={() => setIsModalOpen(false)}
               className="px-8 py-3 rounded-full font-bold uppercase tracking-wider transition-all duration-300 hover:scale-105"
               style={{ backgroundColor: color, color: '#fff', boxShadow: `0 0 15px ${color}60` }}
             >
-              Got it
+              Close
             </button>
           </div>
         </div>

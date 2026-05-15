@@ -7,6 +7,8 @@ export interface EventDetails {
   category: 'Ceremony' | 'Competition' | 'Exhibition' | 'Workshop' | 'Hackathon';
   description: string;
   subEvents?: string[];
+  registrationUrl?: string;
+  registrationLinks?: Array<{ label: string; url: string }>;
   color: string;
   prizePool: string;
   image: string;
@@ -39,6 +41,20 @@ export const events: EventDetails[] = [
       "Software Prototype",
       "Poster Presentation"
     ],
+    registrationLinks: [
+      {
+        label: "Hardware Prototype Exhibition",
+        url: "https://forms.gle/KsENGbSd9hkqZER1A"
+      },
+      {
+        label: "Software Prototype Exhibition",
+        url: "https://forms.gle/SzRVYBxYgiMyztwi7"
+      },
+      {
+        label: "Poster Presentation Exhibition",
+        url: "https://forms.gle/9GbRXQhuTL4biLcZ9"
+      }
+    ],
     color: "#ff00ff",
     prizePool: "TBA",
     image: "/eventImages/integratedTechExibition.png"
@@ -51,6 +67,7 @@ export const events: EventDetails[] = [
     time: "11:00 AM - 12:00 PM",
     category: "Competition",
     description: "Test your knowledge across various domains of technology, pop culture, and general awareness. A fast-paced battle of wits where only the sharpest minds survive.",
+    registrationUrl: "https://forms.gle/VpsGgPXGUx7rs6cy8",
     color: "#00f0ff",
     prizePool: "TBA",
     image: "/eventImages/quiz.png"
@@ -63,6 +80,7 @@ export const events: EventDetails[] = [
     time: "11:00 AM - 1:00 PM",
     category: "Competition",
     description: "Watch autonomous and manual machines navigate complex tracks. Teams will deploy their robots to race against the clock and claim the top spot.",
+    registrationUrl: "https://forms.gle/esQ1vkF62LzdmW3h9",
     color: "#00f0ff",
     prizePool: "TBA",
     image: "/eventImages/roborace.png"
@@ -75,6 +93,7 @@ export const events: EventDetails[] = [
     time: "12:30 PM - 02:00 PM",
     category: "Competition",
     description: "Communicate with the machine. Prove your ability to extract precise, creative, and optimized outputs from large language models in the shortest time possible.",
+    registrationUrl: "https://forms.gle/Ft12qZPMh9LJtk3C7",
     color: "#7000ff",
     prizePool: "TBA",
     image: "/eventImages/promptEngineering.png"
@@ -87,6 +106,7 @@ export const events: EventDetails[] = [
     time: "01:45 PM - 3:00 PM",
     category: "Competition",
     description: "Crafting the digital experience. Designers will be given a problem statement to wireframe, prototype, and present a high-fidelity interface that solves user needs.",
+    registrationUrl: "https://forms.gle/UziZEFtAyQBgrZ6y6",
     color: "#7000ff",
     prizePool: "TBA",
     image: "/eventImages/uiux.png"
@@ -99,6 +119,7 @@ export const events: EventDetails[] = [
     time: "03:15 PM - 05:00 PM",
     category: "Competition",
     description: "Solve complex data structure and algorithm problems under intense time pressure.",
+    registrationUrl: "https://forms.gle/bFmY4FqcUZhYe6ae8",
     color: "#00f0ff",
     prizePool: "TBA",
     image: "/eventImages/codingCompetition.png"
@@ -111,6 +132,7 @@ export const events: EventDetails[] = [
     time: "03:00 PM - 06:00 PM",
     category: "Competition",
     description: "Pitch your most groundbreaking startup or tech idea to a panel of expert judges.",
+    registrationUrl: "https://forms.gle/PHKBXwwLRz5HAH2o9",
     color: "#00f0ff",
     prizePool: "TBA",
     image: "/eventImages/innovativeIdeaPitching.png"
@@ -124,6 +146,7 @@ export const events: EventDetails[] = [
     time: "09:00 AM - 06:00 PM",
     category: "Hackathon",
     description: "A marathon of code, caffeine, and creativity. Build a functional prototype from scratch addressing real-world themes within a grueling 12-hour window.",
+    registrationUrl: "https://forms.gle/kRg28qsqkiV3hjoL8",
     color: "#ff00ff",
     prizePool: "TBA",
     image: "/eventImages/hackathon.png"
@@ -136,6 +159,7 @@ export const events: EventDetails[] = [
     time: "10:00 AM - 12:00 PM",
     category: "Competition",
     description: "Prepare for launch in this exciting aerodynamics and propulsion contest.",
+    registrationUrl: "https://forms.gle/MwnBUnKwdVjJG3a99",
     color: "#7000ff",
     prizePool: "TBA",
     image: "/eventImages/liftoff.png"
@@ -148,6 +172,7 @@ export const events: EventDetails[] = [
     time: "12:15 PM - 02:30 PM",
     category: "Competition",
     description: "Protect the egg at all costs! Design the ultimate safe landing structure.",
+    registrationUrl: "https://forms.gle/zYcGxgAUoTt1pbTa7",
     color: "#7000ff",
     prizePool: "TBA",
     image: "/eventImages/eggstravacanza.png"
@@ -160,6 +185,7 @@ export const events: EventDetails[] = [
     time: "02:30 PM - 04:00 PM",
     category: "Competition",
     description: "Engineering structural integrity using limited materials. Teams will construct model bridges and test their load-bearing capacities until failure.",
+    registrationUrl: "https://forms.gle/gQ5HH7w4iECz4XiYA",
     color: "#ff00ff",
     prizePool: "TBA",
     image: "/eventImages/bridgeBuilding.png"
@@ -172,6 +198,7 @@ export const events: EventDetails[] = [
     time: "04:00 PM - 05:30 PM",
     category: "Competition",
     description: "Precision meets speed. Participants will replicate complex 2D drafting designs using AutoCAD within the strict time limit.",
+    registrationUrl: "https://forms.gle/r7ikpUifZXLXZQed9",
     color: "#00f0ff",
     prizePool: "TBA",
     image: "/eventImages/autocad.png"
