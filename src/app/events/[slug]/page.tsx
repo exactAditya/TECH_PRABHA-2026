@@ -20,8 +20,12 @@ export default async function EventDetailPage({
   const event = events.find((e) => e.slug === resolvedParams.slug);
 
   if (!event) {
-    notFound();
+    return notFound();
   }
+
+  const hasRegistration = Boolean(
+    event.registrationUrl || (event.registrationLinks && event.registrationLinks.length > 0)
+  );
 
   return (
     <PageLayout title={event.title} subtitle={event.category}>
@@ -86,17 +90,20 @@ export default async function EventDetailPage({
           )}
 
           {/* Registration CTA */}
-          <div className="mt-12 flex flex-col sm:flex-row gap-6 items-center border-t border-white/10 pt-10">
-            <RegisterButton
-              color={event.color}
-              href={event.registrationUrl}
-              links={event.registrationLinks}
-            />
-            {/* <button className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors tracking-widest text-sm uppercase">
-              <Share2 size={16} />
-              Share Event
-            </button> */}
-          </div>
+          {hasRegistration && (
+            <div className="mt-12 flex flex-col sm:flex-row gap-6 items-center border-t border-white/10 pt-10">
+              <RegisterButton
+                color={event.color}
+                href={event.registrationUrl}
+                links={event.registrationLinks}
+                label={event.registrationLinks?.length ? "Select Domain" : "Register Now"}
+              />
+              {/* <button className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors tracking-widest text-sm uppercase">
+                <Share2 size={16} />
+                Share Event
+              </button> */}
+            </div>
+          )}
         </div>
       </div>
     </PageLayout>
